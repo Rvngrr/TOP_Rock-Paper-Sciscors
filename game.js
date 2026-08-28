@@ -1,84 +1,96 @@
-let character = ['Rock', 'Paper', 'Scissors'];
+const choices = ['Rock', 'Paper', 'Scissors'];
 let retry;
+let playerScore = 0;
+let computerScore = 0;
+
+function getPlayerChoice(){
+    let answer = prompt(
+        'Pick a character: 1. Rock, 2. Paper, 3. Scissors'
+    );
+
+    let index = Number(answer)-1;
+    
+    if (index >= 0 && index < choices.length){
+        return choices[index]
+    }
+
+    alert('Invalid Choice!')
+    return null
+}
+
+function playRound(computer,player){
+    if(computer === player){
+        console.log("Draw")
+    }
+    else if(computer === 'Rock' && player === 'Paper'){
+        playerScore += 1;
+        console.log("player Wins");
+    }
+    else if(computer === 'Paper' && player === 'Scissors'){
+        playerScore += 1;
+        console.log("player Wins");
+
+    }
+    else if(computer === 'Scissors' && player === 'Rock'){
+        playerScore += 1;
+        console.log("player Wins");
+
+    }
+    else{
+        console.log("player Lost")
+        computerScore += 1;
+    }
+
+    console.log("player     : ", playerScore);
+    console.log("computer   : ", computerScore);
+
+}
+
+function getWinner(){
+    if(playerScore === 5){
+        console.log('Congratulations You Win')
+        return false;
+    }
+    else if (computerScore === 5){
+        console.log("You Lost")
+        
+        return false;
+
+    }
+    return true
+}
+
+    function getComputerChoice(){
+    let charIndex = Math.floor(Math.random()*3);
+    return choices[charIndex];
+}
+
+
 do{
-    let playerScore = 0;
-    let computerScore = 0;
     let playAgain = true;
 
-        function getComputerChoice(){
-            let charIndex = Math.floor(Math.random()*3);
-            return character[charIndex];
-
-        }
-
     do{
+        let computer = getComputerChoice();
+        let player = getPlayerChoice();
 
-        let answer = prompt('Pick a character : 1. Rock, 2. Paper, 3. Scissors')
-        let Computer = getComputerChoice();
-        let Player = getPlayerChoice(answer - 1);
-
-        function getPlayerChoice(int){
-            if(int > 0 && int != undefined || null){
-                if( int > 3){
-                alert('Out of Range: 1. Rock, 2. Paper, 3. Scissors');
-            }
-            else{
-                return character[int];
-            }
-            }
+        if(player === null){
+            continue;
         }
 
-        function playRound(Computer,Player){
-            if(Computer === Player){
-                console.log("Draw")
-            }
-            else if(Computer === 'Rock' && Player === 'Paper'){
-                playerScore += 1;
-                console.log("Player Wins");
-            }
-            else if(Computer === 'Paper' && Player === 'Scissors'){
-                playerScore += 1;
-                console.log("Player Wins");
-
-            }
-            else if(Computer === 'Scissors' && Player == 'Rock'){
-                playerScore += 1;
-                console.log("Player Wins");
-
-            }
-            else{
-                console.log("Player Lost")
-                computerScore += 1;
-            }
-
-            console.log("Player     : ", playerScore);
-            console.log("Computer   : ", computerScore);
-
-        }
-
-        function getWinner(){
-            if(playerScore === 5){
-                console.log('Congratulations You Win')
-                playAgain = false;
-            }
-            else if (computerScore === 5){
-                console.log("You Lost")
-                playAgain = false;
-            }
-        }
-
-        console.log('Player     : ', Player);
-        console.log ('Computer  : ', Computer);
-        playRound(Computer,Player);
-        getWinner();
+        console.log('player     : ', player);
+        console.log ('computer  : ', computer);
+        playRound(computer,player);
+        playAgain = getWinner();
     }
     while(playAgain);
     ans = prompt('Do you want to retry: Y/N');
-    if(ans == null){
+    if(ans == null || (ans.toUpperCase() !== 'Y')){
         retry = false;
     }
     else{
         retry =  true;
+        playerScore = 0;
+        computerScore = 0;
     }
 } while(retry);
 
