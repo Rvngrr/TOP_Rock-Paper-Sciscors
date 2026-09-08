@@ -52,7 +52,7 @@ function getPlayerChoice(Choice){
 }
 
 function playRound(computer,player){
-    let result = "";
+    let result = '';
     if(computer === player){
         result = 'Draw';
     }
@@ -69,8 +69,8 @@ function playRound(computer,player){
         result = 'Player Wins';
     }
     else{
-        console.log("player Lost")
         computerScore += 1;
+        result = 'Player Lost'
     }
 
     console.log("player     : ", playerScore);
@@ -84,7 +84,7 @@ function getWinner(computerScore,playerScore){
 
     }
     else if (computerScore === 5){
-        console.log("You Lost");
+        console.log("You Lost, Try Again!");
     }
 }
 
@@ -112,7 +112,3 @@ button.forEach((btn)=>{
         getWinner(computerScore,playerScore);
     });
 });
-
-
-
-
