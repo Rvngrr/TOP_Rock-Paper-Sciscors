@@ -46,21 +46,21 @@ function playRound(computer,player){
 
 }
 
-function getWinner(){
-    if(playerScore === 5){
-        console.log('Congratulations You Win')
-        return false;
-    }
-    else if (computerScore === 5){
-        console.log("You Lost")
+// function getWinner(){
+//     if(playerScore === 5){
+//         console.log('Congratulations You Win')
+//         return false;
+//     }
+//     else if (computerScore === 5){
+//         console.log("You Lost")
         
-        return false;
+//         return false;
 
-    }
-    return true
-}
+//     }
+//     return true
+// }
 
-    function getComputerChoice(){
+function getComputerChoice(){
     let charIndex = Math.floor(Math.random()*3);
     return choices[charIndex];
 }
