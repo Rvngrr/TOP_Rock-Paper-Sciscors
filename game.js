@@ -1,21 +1,55 @@
+const container = document.querySelector('.container')
+const rock = document.createElement('button');
+const paper = document.createElement('button');
+const scissors = document.createElement('button');
+
+rock.classList.add('Btn');
+paper.classList.add('Btn');
+scissors.classList.add('Btn');
+
+rock.textContent = 'Rock';
+paper.textContent = 'Paper';
+scissors.textContent = 'Scissors';
+
+container.appendChild(rock);
+container.appendChild(paper);
+container.appendChild(scissors);
+
+container.setAttribute('style',`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+    `)
+
+// =============================================================================================================================
+
 const choices = ['Rock', 'Paper', 'Scissors'];
 let retry;
 let playerScore = 0;
 let computerScore = 0;
 
-function getPlayerChoice(){
-    let answer = prompt(
-        'Pick a character: 1. Rock, 2. Paper, 3. Scissors'
-    );
+function getPlayerChoice(Choice){
+   switch (Choice){
+        case "Rock":{
+            console.log(0);
+            return 1;
+        }
+        
+        case "Paper":{
+            console.log(1);
+            return 2;
+        }
+        
+        case "Scissors":{
+            console.log(2);
+            return 3;
+        }
 
-    let index = Number(answer)-1;
-    
-    if (index >= 0 && index < choices.length){
-        return choices[index]
+        default:
+            alert("Invalid Character!!!")
+
     }
-
-    alert('Invalid Choice!')
-    return null
 }
 
 function playRound(computer,player){
@@ -66,35 +100,47 @@ function getComputerChoice(){
 }
 
 
-do{
-    let playAgain = true;
+const button = document.querySelectorAll('button');
+let playerChoice = "";
 
-    do{
-        let computer = getComputerChoice();
-        let player = getPlayerChoice();
-
-        if(player === null){
-            continue;
-        }
-
-        console.log('player     : ', player);
-        console.log ('computer  : ', computer);
-        playRound(computer,player);
-        playAgain = getWinner();
-    }
-    while(playAgain);
-    ans = prompt('Do you want to retry: Y/N');
-    if(ans == null || (ans.toUpperCase() !== 'Y')){
-        retry = false;
-    }
-    else{
-        retry =  true;
-        playerScore = 0;
-        computerScore = 0;
-    }
-} while(retry);
+button.forEach((btn)=>{
+    btn.addEventListener("click",()=>{
+        playerChoice = btn.textContent;
+        console.log(getPlayerChoice(playerChoice));
+        
+    });
+});
 
 
+
+// do{
+//     let playAgain = true;
+
+//     do{
+//         let computer = getComputerChoice();
+//         let player = getPlayerChoice(playerChoice);
+
+//         if(player === null){
+//             continue;
+//         }
+
+//         console.log('player     : ', player);
+//         console.log ('computer  : ', computer);
+//         playRound(computer,player);
+//         playAgain = getWinner();
+//     }
+//     while(playAgain);
+//     ans = prompt('Do you want to retry: Y/N');
+//     if(ans == null || (ans.toUpperCase() !== 'Y')){
+//         retry = false;
+//     }
+//     else{
+//         retry =  true;
+//         playerScore = 0;
+//         computerScore = 0;
+//     }
+// } while(retry);
+    
 
 
 
