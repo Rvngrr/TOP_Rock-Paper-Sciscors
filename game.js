@@ -30,45 +30,43 @@ let playerScore = 0;
 let computerScore = 0;
 
 function getPlayerChoice(Choice){
+    
    switch (Choice){
         case "Rock":{
-            console.log(0);
-            return 1;
+            return 'Rock';
         }
         
         case "Paper":{
-            console.log(1);
-            return 2;
+            return 'Paper';
         }
         
         case "Scissors":{
-            console.log(2);
-            return 3;
+            return "Scissors";
         }
 
         default:
-            alert("Invalid Character!!!")
+            alert("Invalid Character!!!");
+        
 
     }
 }
 
 function playRound(computer,player){
+    let result = "";
     if(computer === player){
-        console.log("Draw")
+        result = 'Draw';
     }
     else if(computer === 'Rock' && player === 'Paper'){
         playerScore += 1;
-        console.log("player Wins");
+        result = 'Player Wins';
     }
     else if(computer === 'Paper' && player === 'Scissors'){
         playerScore += 1;
-        console.log("player Wins");
-
+        result = 'Player Wins';
     }
     else if(computer === 'Scissors' && player === 'Rock'){
         playerScore += 1;
-        console.log("player Wins");
-
+        result = 'Player Wins';
     }
     else{
         console.log("player Lost")
@@ -77,28 +75,25 @@ function playRound(computer,player){
 
     console.log("player     : ", playerScore);
     console.log("computer   : ", computerScore);
-
+    console.log("Result     : ", result)
 }
 
-// function getWinner(){
-//     if(playerScore === 5){
-//         console.log('Congratulations You Win')
-//         return false;
-//     }
-//     else if (computerScore === 5){
-//         console.log("You Lost")
-        
-//         return false;
+function getWinner(computerScore,playerScore){
+    if(playerScore === 5){
+        console.log('Congratulations You Win');
 
-//     }
-//     return true
-// }
+    }
+    else if (computerScore === 5){
+        console.log("You Lost");
+    }
+}
 
 function getComputerChoice(){
     let charIndex = Math.floor(Math.random()*3);
     return choices[charIndex];
 }
 
+//===========================================================================================================================================
 
 const button = document.querySelectorAll('button');
 let playerChoice = "";
@@ -106,41 +101,18 @@ let playerChoice = "";
 button.forEach((btn)=>{
     btn.addEventListener("click",()=>{
         playerChoice = btn.textContent;
-        console.log(getPlayerChoice(playerChoice));
         
+        let computer = getComputerChoice();
+        let player = getPlayerChoice(playerChoice);
+        
+        console.log('player     : ', player);
+        console.log ('computer  : ', computer);
+
+        playRound(computer, player);
+        getWinner(computerScore,playerScore);
     });
 });
 
-
-
-// do{
-//     let playAgain = true;
-
-//     do{
-//         let computer = getComputerChoice();
-//         let player = getPlayerChoice(playerChoice);
-
-//         if(player === null){
-//             continue;
-//         }
-
-//         console.log('player     : ', player);
-//         console.log ('computer  : ', computer);
-//         playRound(computer,player);
-//         playAgain = getWinner();
-//     }
-//     while(playAgain);
-//     ans = prompt('Do you want to retry: Y/N');
-//     if(ans == null || (ans.toUpperCase() !== 'Y')){
-//         retry = false;
-//     }
-//     else{
-//         retry =  true;
-//         playerScore = 0;
-//         computerScore = 0;
-//     }
-// } while(retry);
-    
 
 
 
